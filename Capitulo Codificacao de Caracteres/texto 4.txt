@@ -1,0 +1,383 @@
+\chapter{Arquivos Textuais}
+
+Nesse capítulo é feita uma introdução aos formatos de arquivos que encontramos e que devem ser processados para que possam ser realizadas tarefas de indexação, busca e aprendizado de máquina com textos.
+
+Muitos desses formatos não podem ser lidos diretamente por seres humanos, ou podem ser lidos apenas em certas condições, enquanto outros são de fáceis compreensão.
+
+O objetivo de conhecer os formatos é compreender os métodos de transformar o conteúdo desses arquivos em arquivos simples de texto, que serão usados nas tarefas de processamento de texto.
+
+
+\section{Os formatos mais comuns}
+
+Os formatos de arquivo são criados com diferentes motivações, o que leva a uma série de requisitos, e restrições, e também por escolhas pessoais ou institucionais.
+Assim, enquanto o formato em que são guardados os arquivos fonte de \LaTeX\  deve poder ser lido por seres humanos, o formato básico resultante do seu processamento se destina a ser processado por programas de computador e é de difícil leitura para seres humanos.
+
+A maioria do processamento que é feito hoje em textos usa poucos tipos de arquivos: arquivos de texto simples, arquivos no formato do Word, e arquivos do tipo PDF, HTML, XML ou JSON.
+
+Esses formatos podem ser divididos, de forma geral, em três tipos: formatos de edição, formatos de marcação ou formatos de impressão.
+
+Os formatos de edição podem ser editados diretamente e não possuem nenhuma marcação. Normalmente programas de computador são guardados nesse formato. Eles estão sempre codificados de alguma forma, como visto no \autoref{chap:codificacao}.
+
+Os formatos de marcação ainda podem ser editados diretamente, apresentando um arquivo legível para o ser humano. Editores de texto podem esconder a marcação, usando uma apresentação WYSIWYG, mas sempre vão guardá-los de forma que possam ser abertos por um editor comum.
+
+Formatos de edição e marcação são criadas para atender simultaneamente o homem e a máquina, podendo variar entre formatos facilmente interpretáveis por humanos, até alguns que são de difícil interpretação.
+
+Finalmente, formatos de impressão são feitos para indicar como um texto deve ser impresso ou visualizado. Um dos formatos de impressão mais conhecidos, PostScript, é na verdade uma linguagem de programação que pode ser entendida por um especialista.
+
+Se um arquivo em um formato for lido com a suposição que foi escrito em outro formato, erros aparecerão.
+
+Além disso, vamos tratar de alguns formatos que podem ser encontrados não só em arquivos, mas também em \textit{streams} de dados. O processamento, porém, é semelhante.
+
+\section{Formatos de Edição}
+
+Pouco é preciso falar de formatos de edição que não tenha sido tratado no \autoref{chap:codificacao}, pois normalmente a única maneira deles causarem algum problema é serem lidos de acordo com uma codificação diferente da planejada.
+
+Arquivos desse tipo normalmente são chamados de arquivos texto e têm como característica usarem a extensão ``.txt'', mas isso não é uma regra determinante. Outros formatos, com mais estrutura, como um \textit{Comma Separeted File} ou ``.cvs'' podem ser tratados, algumas vezes, como um arquivo texto simples.
+
+\section{Linguagens de Marcação}
+
+Muitos arquivos textuais são construídos por meio de linguagens de marcação. Em uma linguagem de marcação, caracteres são usados tanto para o conteúdo como para definir, de forma imperativa ou declarativa, o que deve ser feito por um processador específico, como um editor de texto ou uma impressora.
+
+A marcação não é parte do texto, mas está inserida nele. Assim, em \LaTeX, por exemplo, escrevemos
+\begin{verbatim}
+    \textbf{Negrito}
+\end{verbatim}
+quando queremos que o texto ``Negrito'' esteja em negrito, como em ``\textbf{negrito}''.
+
+
+\begin{gxinfobox}{Stand-off markup}
+Uma alternativa ao uso de linguagens de marcação seria usar o que é conhecido como ``\textit{stand-off markup}'', ou ``\textit{stand-off annotation}'': anotações separadas que fazem referência ao texto original. Por exemplo, um arquivo adicional dizendo onde começa o negrito, por exemplo no caracter 12302 do arquivo, e onde acaba, no caracter 12308, no caso. A ideia foi defendida por \citet{Nelson1997}, e tem uma versão descrita por \citet{Thompson1997}.
+\end{gxinfobox}
+
+Entre as linguagens de marcação mais utilizadas estão: HTML, XML, SGML, \LaTeX, RTF,Open XML Document (formato usado no Microsoft Word), OpenDocument (.odt).
+
+As linguagens de marcação também podem ser divididas em\citep{Coombs1987}\footnote{Os autores também citam um tipo \textit{Puntuactional}, referente a marcações sintáticas que dão informações sobre enunciados escritos, como espaços, e que não é preciso considerar no momento.}:
+\begin{itemize}
+    \item Descritivas\footnote{Provalvemente o nome mais adequado seria declarativas}, como HTML, SGML, XML;
+    \item Procedurais, como \TeX, PostScript ou Lout, e
+    \item De Apresentação, como Wikis.
+\end{itemize}
+
+
+\subsection{HTML}
+
+HyperText Markup Language foi um formato originalmente criado por Tim Berners-Lee, baseado em SGML, para servir de linguagem de marcação para o World Wide Web (WWW). Junto com o protocolo HTTP ele formou uma das tecnologias de maior sucesso na história.
+
+Apesar de hoje HTML possuir vários tipos de marcação, inicialmente possuía poucos rótulos, que permitiam descrever efeitos desejados na apresentação do texto e a criação de ligações de hipertexto via rede. Ao longo do tempo os rótulos foram se avolumando e novas características apareceram, como a possibilidade de executar programas dentro de uma página HTML, em JavaScript\citep{Mozilla2021}, ou de criar estilos variados e possivelmente dinâmicos, com CSS\citep{W3C2021csss}.
+
+\begin{gxinfobox}{Os padrões da Internet/WWW}
+Os padrões da Internet são estabelecidos atualmente pela Internet Engineering Task Force, sendo denominados RFC, de \textit{Request for Comments}, e numerados sequencialmente~\citep{IETF2021}.
+
+A maioria dos padrões relacionados a Web, ou ao WWW, é estabelecida pelo \textit{World Wide Web Consortium} (W3C), ``an international community where member organizations, a full-time staff, and the public work together to develop Web standards. Led by Web inventor and Director Tim Berners-Lee and CEO Jeffrey Jaffe, W3C's mission is to lead the Web to its full potential.''.´\citep{W3C2021about}.
+\end{gxinfobox}
+
+
+Não é fácil processar corretamente HTML, porque os arquivos desse formato são criados com muita liberdade. Na prática, os principais processadores de HTML, os navegadores WWW, perdoam muitos erros.
+
+Porém, normalmente a única necessidade, ou a necessidade principal quando realizando atividades de indexação ou aprendizado de máquina é limpar o HTML, ficando apenas com o texto.
+
+Um arquivo HTML moderno, e muito simples, pode ter a seguinte aparência:
+
+\begin{html}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Título da Página</title>
+</head>
+<body>
+
+<h1>Cabeçalho</h1>
+<p>Um parágrafo simples</p>
+
+Usando entidades HTML &copy;
+
+</body>
+</html>
+\end{html}
+
+Sua visualização seria a da \autoref{fig:htmlsimples}
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics{Imagens/RepresentacaoTexto/htmlsimples}
+    \caption{A visualização de um arquivo HTML muito simples.}
+    \label{fig:htmlsimples}
+\end{figure}
+
+A questão em HTML é que palavras escolher, isto é, como retirar o texto desejado do arquivo. Em primeiro lugar existem as \textit{tags}, cujo seu texto pode desprezado, isto é, não queremos processar algo como \verb*|TITLE|. Além disso, existem as entidades HTML, que podem ser interessantes, ou não, e normalmente têm que ser traduzidas, nesse caso um \verb*|&acute;|, por exemplo, deve virar um 'á' ou um 'a', de acordo com o que é necessário para o sistema.
+
+Por exemplo, no arquivo HTML acima, as partes que devem ser trabalhadas incluem a palavra ``Cabeçalho'' e a frase ``Um parágrafo simples'', mas o que fazer com ``Título da Página''? Devemos considerá-lo ou não como parte do documento para indexação, aprendizado de máquina, ou ainda outra aplicação.
+
+Uma página web geralmente possui um HTML complexo, gerado por um conjunto de programas e manipulação humana. A \autoref{fig:htmlsitexexeo} mostra um um fragmento do HTML da página pessoal do autor, gerado por meio do WordPress.
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/htmlsitexexeo}
+    \caption{Imagem parcial do HTML usado em uma página pessoal}
+    \label{fig:htmlsitexexeo}
+\end{figure}
+
+\section{HTML 5}
+
+HTML 5 complica as coisas um pouco, porque é uma junção de HTML, Javascript, CSS e XML. Isso faz com que nao só que seja mais difícil fazer o \textit{parsing} do arquivo, como também implica em decidir o que deve e o que não deve ser aceito como texto, de acordo com necessidades específicas.
+
+Parte da mudança da mentalidade da Web ao longo do tempo foi que antes o navegador só era responsável por tarefas básicas de visualização. Hoje é possível colocar partes móveis de texto e mexer dinamicamente na estrutura da página, sendo na prática um ambiente de execução. A \autoref{fig:historiadohtml5} mostra a evolução de HTML ao longo do tempo até a versão inicial do HTML 5~\citep{WHATWG2021}, com as principais influências para o desenvolvedor, e que continua recebendo adições, principalmente no CSS~\citep{W3C2021csss}.
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Imagens/RepresentacaoTexto/HistoriaDoHTML5}
+    \caption{Linha do tempo do HTML ao HTML 5.}
+    \label{fig:historiadohtml5}
+\end{figure}
+
+Já a \autoref{fig:html-ambiente-padroes} dá uma visão geral da plataforma Web~\citep{WHATWG2021}.
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{"Imagens/RepresentacaoTexto/HTML ambiente padrões"}
+    \caption{Visão geral da plataforma Web, segundo \citet{WHATWG2021}}
+    \label{fig:html-ambiente-padroes}
+\end{figure}
+ 
+\subsection{Limpando HTML de arquivos com Python}
+
+Para se obter o texto que está continudo em um arquivo HTML, qualquer que seja sua versão, é necessário então limpar, ou filtrar, a linguagem de marcação do arquivo.
+
+Existem várias opções para fazer essa limpeza.
+\verb*|lxml| é um pacote Python para tratar XML e HTML. Com ele é possível eliminar toda a marcação com facilidade, como no \autoref{prog:lxml}, e obter como resultado uma string contendo o texto.
+
+\begin{python}[caption=Programa simples para obter todo o texto dentro de um arquivo HTML,label=prog:lxml]
+    import lxml
+
+    f = open('processahtmlsimplesexemplo.html','r',encoding='utf-8')
+    origin = f.read()
+
+    html = lxml.html.fromstring(origin)
+    text = str(html.text_content())
+
+    print(text.strip())
+\end{python}
+
+A resposta, apresentada a seguir, remove os rótulos HTML e trata as entidades:
+\begin{gxoutput}[label=Saída do \autoref{prog:lxml}]
+Título da Página
+
+
+
+Cabeçalho
+Um parágrafo simples
+
+Usando entidades HTML ©
+\end{gxoutput}
+
+\subsection{Limpando HTML de arquivos com KNIME}
+
+Usando as extensões é possível desenhar um workflow KNIME que lê um arquivo indicado por uma URL e depois remove todo o markup dele, como é demonstrado na sequência de sequência de Figuras  \ref{fig:workflowlimpahtml}, %
+\ref{fig:workflowlimpahtml1}, %
+\ref{fig:knime-markup-tag-filter-retrieve}, %
+\ref{fig:knime-webpage-retriever-results}, % 
+\ref{fig:knime-marktuptagfilter-results}.
+
+\begin{figure}
+    \centering
+    \includegraphics{Imagens/RepresentacaoTexto/workflowlimpahtml}
+    \caption{Workflow para ler, via URL, e limpar um arquivo HTML}
+    \label{fig:workflowlimpahtml}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-web-page-retriever-config}
+    \caption{Recuperando uma página via sua URL.}
+    \label{fig:workflowlimpahtml1}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-markup-tag-filter-retrieve}
+    \caption{Configurando a remoção de tags de markup}
+    \label{fig:knime-markup-tag-filter-retrieve}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-Webpage-retriever-results}
+    \caption{Resultado recuperado pelo nó de Leitura.}
+    \label{fig:knime-webpage-retriever-results}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-marktuptagfilter-results}
+    \caption{Resultado pós remoção do markup.}
+    \label{fig:knime-marktuptagfilter-results}
+\end{figure}
+
+
+
+
+\section{Outros Formatos Específicos}
+
+Mais informação sobre esses formatos pode ser obtida em \url{https://docs.fileformat.com/word-processing/}.
+
+
+
+
+
+\section{Formatos de Impressão}
+
+Formatos de impressão são arquivos utilizados primariamente para impressão, mesmo que possam ser compreendidos por seres humanos.
+
+A principal linguagem de impressão é PostScript, porém, hoje em dia, o principal formato usado não é o PostScript (arquivos .ps), mas sim o Page Description Format (arquivos .pds), que utiliza o PostScript para descrever páginas, dentro de um esquema de arquivo específico.
+
+\section{PDF}
+
+\textit{Portable Documento Format}, PDF, é um formato criado pela Adobe.
+
+
+\subsection{Extraindo texto do PDF em Python}
+
+Vários pacotes ajudam a extrair o texto de um arquivo PDF, como o \verb*|pdfminer.six|. O \autoref{prog:pdfminer} mostra uma forma simples de obter todo o texto de um arquivo pdf. Já o \autoref{prog:pdfminer6} mostra o uso de funções específicos, dando maior controle ao programador.
+
+
+\begin{python}[caption=Usando o pdfminer.six para extrair texto de um arquivo PDF,label=prog:pdfminer]
+import pdfminer.high_level as pdfh
+
+text = pdfh.extract_text("arquivo.pdf")
+
+print(len(text))
+\end{python}
+
+\begin{python}[caption=Usando uma forma mais complexa de extrair texto de um arquivo PDF,label=prog:pdfminer6]
+from io import StringIO
+
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfparser import PDFParser
+
+output_string = StringIO()
+with open("arquivo.pdf", 'rb') as in_file:
+    parser = PDFParser(in_file)
+    doc = PDFDocument(parser)
+    rsrcmgr = PDFResourceManager()
+    device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    for page in PDFPage.create_pages(doc):
+        interpreter.process_page(page)
+
+print(output_string.getvalue())
+\end{python}
+
+\subsection{Extraindo texto do PDF em KNIME}
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics{Imagens/RepresentacaoTexto/KNIME-lepdf}
+    \caption{Workflow para ler e transformar um arquivo PDF em um Document do KNIME}
+    \label{fig:knime-lepdf}
+\end{figure}
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-configurelePDF}
+    \caption{Configuração do nós PDF Parser}
+    \label{fig:knime-configurelepdf}
+\end{figure}
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-configureDocumentViewer}
+    \caption{Configuração do nó Document Viewer}
+    \label{fig:knime-configuredocumentviewer}
+\end{figure}
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-DocumentViewerList}
+    \caption{Vendo a lista de documentos lidos}
+    \label{fig:knime-documentviewerlist}
+\end{figure}
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/KNIME-documentdetails}
+    \caption{Vendo o detalhe de um documento, principalmente seu conteúdo textual.}
+    \label{fig:knime-documentdetails}
+\end{figure}
+
+
+\section{XML}
+
+XML, de \textit{eXtensible Markup Language}\footnote{A pronúncia em inglês é ex-em-el.}~\citep{W3C2008}, é um formato projetado para armazenar e transferir conteúdo, de forma legível para humanos, mas não necessariamente fácil de entender. É interessante notar que o XML usado atualmente é o XML 1.0, cuja versão mais nova é mais recente que a versão mais nova do XML 1.1~\citep{W3C2006}.
+
+A linguagem possui um conjunto de \textit{tags} fixas, mas em cada arquivo a grande parte delas é definida arbitrariamente pelo criador, sendo algumas vezes descritas em esquemas. A \autoref{fig:xml} mostra um arquivo desse tipo.
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/RepresentacaoTexto/xml}
+    \caption{Exemplo de fragmento de arquivo xml.}
+    \label{fig:xml}
+\end{figure}
+
+Um dos problemas de tratar XML é que os dados podem aparecer tanto dentro das \textit{tags} como na forma de texto livro entre o início e o fim de uma marcação.
+
+Um arquivo XML é considerado bem-formado quando segue as regras de sintaxe da linguagem, e válido quando segue as regras estabelecidas em um esquema, isto é, é validado frente a um esquema. Esse esquema pode ser definido em \textit{XML Schema Definition}, um arquivo XSD~\citep{W3C2012,W3C2006}, ou em um formato mais antigo, o \textit{Document Type Definition}, o DTD. XSD usa a própria XML para definir o esquema de outro arquivo XML, enquanto DTD usa um formato diferente.
+
+Por exemplo, um arquivo XML, como o apresentado no \autoref{xml:exdtd}, pode mostrar uma mensagem. Ele segue as regras sintáticas de XML:
+\begin{itemize}
+    \item tem um elemento raiz (mensagem);
+    \item todos os elementos tem um \textit{tag} que os fecha (com a barra no início).
+    \item os \textit{tags} são diferenciam maiúsculas de minúsculas (apensa subtendido no exemplo).
+    \item os elementos estão hiearquizados em árvore corretamente, e
+    \item os valores de atributo estão entre aspas.
+\end{itemize}
+
+
+\begin{xml}[caption=Exemplo de arquivo XML usando um DFD.,label=xml:exdtd]
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mensagem SYSTEM "Mensagem.dtd">
+<mensagem>
+<para>Alice</para>
+<de>Bob</de>
+<titulo>Lembrete</titulo>
+<corpo>Não esqueça a sua promessa!</corpo>
+</mensagem>
+\end{xml}
+
+Como segue as regras da sintaxe, o \autoref{xml:exdtd} é um arquivo bem formado. Mas será ele válido? Para ser válido, deve usar, da forma correta, apenas os elementos descritos no DTD a qye ele se refere, como o da \autoref{xml:dtd}.
+
+\begin{xml}[caption=Exemplo de arquivo DTD.,label=xml:dtd]
+<!DOCTYPE note
+[
+<!ELEMENT mensagem (para,de,titulo,corpo)>
+<!ELEMENT para (#PCDATA)>
+<!ELEMENT de (#PCDATA)>
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT corpo (#PCDATA)>
+]
+\end{xml}
+
+É possível notar, no \autoref{xml:dtd}, que não é permitida a repetição de qualquer elemento.  Outra maneira, mais moderna, de descrever as mesmas regras que estão nesse arquivo é o \autoref{xml:xsd}.
+
+\begin{xml}[caption=Exemplo de arquivo XSD.,label=xml:xsd ]
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="mensagem">
+<xs:complexType>
+<xs:sequence>
+<xs:element type="xs:string" name="para"/>
+<xs:element type="xs:string" name="de"/>
+<xs:element type="xs:string" name="titulo"/>
+<xs:element type="xs:string" name="corpo"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+\end{xml}
+
+
+\section{Exercícios}
+
